@@ -35,6 +35,7 @@ class Network {
     }
   }
 
+  // ignore: missing_return
   Future<bool> event(id) async {
     // Build URL
     var url = api_url + 'event/1';

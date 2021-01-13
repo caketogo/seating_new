@@ -125,10 +125,15 @@ class Login extends StatelessWidget {
                                           new BorderRadius.circular(20.0)),
                                   onPressed: () {
                                     if (_formKey.currentState.validate()) {
-                                      Navigator.push(
-                                          context,
-                                          new MaterialPageRoute(
-                                              builder: (context) => Home()));
+                                      _login().then((result) {
+                                        if (result) {
+                                          Navigator.push(
+                                              context,
+                                              new MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Home()));
+                                        } else {}
+                                      });
                                     }
                                   },
                                 ),
@@ -168,9 +173,11 @@ class Login extends StatelessWidget {
     );
   }
 
-  void _login() async {
+  Future<bool> _login() async {
     var data = {'email': email, 'password': password};
 
     var result = await Network().login(data);
+
+    return result;
   }
 }
